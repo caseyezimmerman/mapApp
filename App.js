@@ -36,6 +36,27 @@ export default class App extends Component{
             longitudeDelta: 0.0121,
           }}
         ></MapView>
+
+        <MapView
+          provider={PROVIDER_GOOGLE}
+          style={styles.map}
+          region={{
+            latitude: 33.98907,
+            longitude: -84.50736,
+            latitudeDelta: 0.015,
+            longitudeDelta: 0.0121,
+          }}
+        ></MapView>
+        <MapView
+          provider={PROVIDER_GOOGLE}
+          style={styles.map}
+          region={{
+            latitude: 33.848351,
+            longitude: -84.373971,
+            latitudeDelta: 0.015,
+            longitudeDelta: 0.0121,
+          }}
+        ></MapView>
       </View>
     );
   }
@@ -46,17 +67,21 @@ const styles = StyleSheet.create({
     // ...StyleSheet.absoluteFillObject,
     // height: 400,
     // width: 400,
-    justifyContent: 'flex-end',
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
     alignItems: 'center',
 },
   map: {
     // ...StyleSheet.absoluteFillObject,
-    height:'70%',
+
+    height:'40%',
     width: '90%',
 },
   text:{
     fontSize:20,
-    marginBottom:10
+    marginTop:20,
+
   }
 
 });
