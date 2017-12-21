@@ -20,11 +20,12 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
-export default class App extends Component<{}> {
+export default class App extends Component{
   render() {
     const { region } = this.props;
     return (
       <View style ={styles.container}>
+        <Text style={styles.text}>STUPID RUNNING APP</Text>
         <MapView
           provider={PROVIDER_GOOGLE}
           style={styles.map}
@@ -42,16 +43,20 @@ export default class App extends Component<{}> {
 
 const styles = StyleSheet.create({
   container: {
-    ...StyleSheet.absoluteFillObject,
-    height: 400,
-    width: 400,
+    // ...StyleSheet.absoluteFillObject,
+    // height: 400,
+    // width: 400,
     justifyContent: 'flex-end',
     alignItems: 'center',
 },
   map: {
     // ...StyleSheet.absoluteFillObject,
-    height:'80%',
-    width: '100%',
+    height:'70%',
+    width: '90%',
+},
+  text:{
+    fontSize:20,
+    marginBottom:10
+  }
 
-  },
 });
