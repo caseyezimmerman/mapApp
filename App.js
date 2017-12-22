@@ -9,7 +9,8 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  ScrollView
 } from 'react-native';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 
@@ -24,63 +25,62 @@ export default class App extends Component{
   render() {
     const { region } = this.props;
     return (
-      <View style ={styles.container}>
-        <Text style={styles.text}>STUPID RUNNING APP</Text>
-        <MapView
-          provider={PROVIDER_GOOGLE}
-          style={styles.map}
-          region={{
-            latitude: 37.78825,
-            longitude: -122.4324,
-            latitudeDelta: 0.015,
-            longitudeDelta: 0.0121,
-          }}
-        ></MapView>
-
-        <MapView
-          provider={PROVIDER_GOOGLE}
-          style={styles.map}
-          region={{
-            latitude: 33.98907,
-            longitude: -84.50736,
-            latitudeDelta: 0.015,
-            longitudeDelta: 0.0121,
-          }}
-        ></MapView>
-        <MapView
-          provider={PROVIDER_GOOGLE}
-          style={styles.map}
-          region={{
-            latitude: 33.848351,
-            longitude: -84.373971,
-            latitudeDelta: 0.015,
-            longitudeDelta: 0.0121,
-          }}
-        ></MapView>
-      </View>
+      
+        <View style={styles.container}>
+          <Text style={styles.text}>STUPID RUNNING APP</Text>
+          <MapView
+            provider={PROVIDER_GOOGLE}
+            style={styles.map}
+            region={{
+              latitude: 37.78825,
+              longitude: -122.4324,
+              latitudeDelta: 0.015,
+              longitudeDelta: 0.0121,
+            }}
+          ></MapView>
+        </View>
+         
     );
   }
 }
 
 const styles = StyleSheet.create({
+  // flex: {
+    
+  //   flexDirection: 'column',
+  //   justifyContent: 'space-between',
+  //   alignItems: 'center',
+  // },
   container: {
     // ...StyleSheet.absoluteFillObject,
-    // height: 400,
+    // height: 4000,
     // width: 400,
+   
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
     flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
+    // flexDirection: 'column',
+    // justifyContent: 'space-between',
+    // alignItems: 'center',
 },
   map: {
     // ...StyleSheet.absoluteFillObject,
-
-    height:'40%',
-    width: '90%',
+    // position: 'absolute',
+    // top: 0,
+    // left: 0,
+    // right: 0,
+    // bottom: 0,
+    height:'80%',
+    width: '100%',
 },
   text:{
     fontSize:20,
-    marginTop:20,
+    // marginTop:20,
 
   }
 
