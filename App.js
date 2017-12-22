@@ -9,16 +9,13 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  TextInput,
+  TouchableOpacity
 } from 'react-native';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+
 
 export default class App extends Component{
   render() {
@@ -36,6 +33,13 @@ export default class App extends Component{
             longitudeDelta: 0.0121,
           }}
         ></MapView>
+        <Text>Location:</Text>
+        <TextInput style={styles.input}/>
+        <Text>Distance:</Text>
+        <TextInput style={styles.input}/>
+        <TouchableOpacity>
+          <Text style={styles.button}>Run</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -51,12 +55,37 @@ const styles = StyleSheet.create({
 },
   map: {
     // ...StyleSheet.absoluteFillObject,
-    height:'70%',
+    height:'60%',
     width: '90%',
+    marginBottom:20
 },
   text:{
     fontSize:20,
     marginBottom:10
+  },
+   input:{
+    borderColor:'black',
+    borderWidth:1,
+    height:35,
+    width:200,
+    // marginLeft:50,
+    marginBottom:10,
+    shadowOffset: {width: 0.5, height: 0.5, },
+    shadowColor: 'black',
+    shadowOpacity: 1.0,
+    borderRadius:5
+  },
+    button:{
+    backgroundColor:'teal',
+    color:'white',
+    height:35,
+    lineHeight:30,
+    marginTop: 15,
+    textAlign:'center',
+    width:55,
+    // marginLeft:65,
+    fontSize:17,
+    borderRadius:10
   }
 
 });
