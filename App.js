@@ -20,6 +20,8 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
+
+console.log("hadhlsadhlashdlksadklasdklashdashdlhkas")
 export default class App extends Component{
   render() {
     const { region } = this.props;
@@ -67,7 +69,7 @@ const styles = StyleSheet.create({
     // ...StyleSheet.absoluteFillObject,
     // height: 400,
     // width: 400,
-    flex: 1,
+    flex: 0.9,
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -75,12 +77,13 @@ const styles = StyleSheet.create({
   map: {
     // ...StyleSheet.absoluteFillObject,
 
-    height:'40%',
+    height:'30%',
     width: '90%',
+
 },
   text:{
     fontSize:20,
-    marginTop:20,
+    marginTop:40,
 
   }
 
