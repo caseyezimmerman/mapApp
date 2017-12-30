@@ -9,7 +9,8 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  Button
 } from 'react-native';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 
@@ -20,45 +21,21 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
-
-console.log("hadhlsadhlashdlksadklasdklashdashdlhkas")
 export default class App extends Component{
+  makeMaps(){
+    console.log('make the maps')
+  }
   render() {
     const { region } = this.props;
     return (
       <View style ={styles.container}>
-        <Text style={styles.text}>STUPID RUNNING APP</Text>
-        <MapView
-          provider={PROVIDER_GOOGLE}
-          style={styles.map}
-          region={{
-            latitude: 37.78825,
-            longitude: -122.4324,
-            latitudeDelta: 0.015,
-            longitudeDelta: 0.0121,
-          }}
-        ></MapView>
-
-        <MapView
-          provider={PROVIDER_GOOGLE}
-          style={styles.map}
-          region={{
-            latitude: 33.98907,
-            longitude: -84.50736,
-            latitudeDelta: 0.015,
-            longitudeDelta: 0.0121,
-          }}
-        ></MapView>
-        <MapView
-          provider={PROVIDER_GOOGLE}
-          style={styles.map}
-          region={{
-            latitude: 33.848351,
-            longitude: -84.373971,
-            latitudeDelta: 0.015,
-            longitudeDelta: 0.0121,
-          }}
-        ></MapView>
+        <Text style={styles.text}>SMART RUNNING APP</Text>
+        <Button
+          onPress={makeMaps}
+          title="Learn More"
+          color="#841584"
+          accessibilityLabel="Learn more about this purple button"
+        />
       </View>
     );
   }
@@ -66,17 +43,12 @@ export default class App extends Component{
 
 const styles = StyleSheet.create({
   container: {
-    // ...StyleSheet.absoluteFillObject,
-    // height: 400,
-    // width: 400,
     flex: 0.9,
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'center',
 },
   map: {
-    // ...StyleSheet.absoluteFillObject,
-
     height:'30%',
     width: '90%',
 
@@ -84,7 +56,5 @@ const styles = StyleSheet.create({
   text:{
     fontSize:20,
     marginTop:40,
-
   }
-
 });
