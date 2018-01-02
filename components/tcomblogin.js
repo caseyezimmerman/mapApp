@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ScrollView, Text, TextInput, View, Button, StyleSheet, TouchableOpacity, TouchableHighlight } from 'react-native';
-import { login } from '../actions/authAction';
+import login from '../actions/authAction';
 import t from 'tcomb-form-native'
 import _ from 'lodash'
 import { bindActionCreators } from 'redux'
@@ -56,7 +56,6 @@ class Login extends Component {
     }
 
     userLogin (e) {
-        this.props.onLogin(this.state.username, this.state.password);
         e.preventDefault();
         // var name = this.state.username
         // var password = this.state.password
@@ -68,7 +67,8 @@ class Login extends Component {
         var password = (this.refs.form.getComponent('password').props.value)  
         console.log(name)
         console.log(email)
-        console.log(password)    
+        console.log(password) 
+        this.props.onLogin(name,email,password);   
        
     }
  

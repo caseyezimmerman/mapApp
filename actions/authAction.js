@@ -3,7 +3,7 @@ import axios from 'axios'
 function login(name,email,password){
 	var axiosPromise = axios({
 	method: 'POST',
-	url: 'localhost:3000/login',
+	url: 'http://localhost:3000/login',
 	data: {
 		name: name,
 		email: email,

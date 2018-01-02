@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ScrollView, Text, TextInput, View, Button, StyleSheet, TouchableOpacity } from 'react-native';
-import { login } from '../actions/authAction';
+import login from '../actions/authAction';
  
 class Login extends Component {
     constructor (props) {
@@ -14,12 +14,12 @@ class Login extends Component {
     }
  
     userLogin (e) {
-        this.props.onLogin(this.state.username, this.state.password);
         e.preventDefault();
         var name = this.state.username
         var password = this.state.password
         console.log(name)
         console.log(password)
+        this.props.onLogin(name);
        
     }
  
