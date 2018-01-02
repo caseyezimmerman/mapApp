@@ -15,6 +15,8 @@ import {
   TouchableOpacity
 } from 'react-native';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import NavBar from './containers/NavBar';
 
 
 
@@ -23,6 +25,7 @@ export default class App extends Component{
     const { region } = this.props;
     return (
       <View style ={styles.container}>
+        <NavBar />
         <Text style={styles.text}>STUPID RUNNING APP</Text>
         {/*<MapView
           provider={PROVIDER_GOOGLE}
@@ -45,7 +48,13 @@ export default class App extends Component{
           style={styles.stretch}
           source={require('./city4.png')}
         />
-        {/*<Image style={styles}*/}
+       {/*<Image 
+          style={styles.stretch}
+          source={require('./rebal2.png')}
+        />
+        <Text style={styles.output}>Login</Text>
+        <TextInput style={styles.input}/>
+        <TextInput style={styles.input}/>*/}
       </View>
     );
   }
@@ -53,7 +62,7 @@ export default class App extends Component{
 
 const styles = StyleSheet.create({
   stretch: {
-    width: '100%'
+    width: '100%',
   },
   container: {
     // ...StyleSheet.absoluteFillObject,
