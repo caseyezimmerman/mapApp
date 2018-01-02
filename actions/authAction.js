@@ -1,10 +1,22 @@
-export const login = (username, password) => {
+import axios from 'axios'
+
+function login(name,email,password){
+	var axiosPromise = axios({
+	method: 'POST',
+	url: 'localhost:3000/login',
+	data: {
+		name: name,
+		email: email,
+		password: password
+		}
+	})
     return {
         type: 'LOGIN',
-        username: username,
-        password: password
+        payload: axiosPromise
     };
 };
+
+export default login
 
 export const logout = () => {
     return {

@@ -4,6 +4,7 @@ import { ScrollView, Text, TextInput, View, Button, StyleSheet, TouchableOpacity
 import { login } from '../actions/authAction';
 import t from 'tcomb-form-native'
 import _ from 'lodash'
+import { bindActionCreators } from 'redux'
 
 
 
@@ -115,13 +116,19 @@ const mapStateToProps = (state, ownProps) => {
         isLoggedIn: state.auth.isLoggedIn
     };
 }
- 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        onLogin: (username, password) => { dispatch(login(username, password)); },
-        onSignUp: (username, password) => { dispatch(signup(username, password)); }
-    }
+
+function mapDispatchToProps(dispatch){
+    return bindActionCreators({
+        onLogin: login
+    },dispatch)
 }
+ 
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         onLogin: login
+//         // onSignUp: (username, password) => { dispatch(signup(username, password)); }
+//     },dispatch)
+// }
  
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
 
