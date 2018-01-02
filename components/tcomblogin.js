@@ -1,7 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { ScrollView, Text, TextInput, View, Button, StyleSheet, TouchableOpacity } from 'react-native';
+import { ScrollView, Text, TextInput, View, Button, StyleSheet, TouchableOpacity, TouchableHighlight } from 'react-native';
 import { login } from '../actions/authAction';
+import t from 'tcomb-form-native'
+
+var Form = t.form.Form 
+var options = {}; // optional rendering options (see documentation)
+
+var Person = t.struct({
+  name: t.String,              // a required string
+  email: t.String,  // an optional string
+  password: t.Number,               // a required number
+  rememberMe: t.Boolean        // a boolean
+});
+
  
 class Login extends Component {
     constructor (props) {
@@ -12,7 +24,7 @@ class Login extends Component {
             password: ''
         };
     }
- 
+
     userLogin (e) {
         this.props.onLogin(this.state.username, this.state.password);
         e.preventDefault();
@@ -28,27 +40,27 @@ class Login extends Component {
         this.setState({ route: alt });
         e.preventDefault();
     }
+
+    onPress () {
+    // call getValue() to get the values of the form
+    var value = this.refs.form.getValue();
+    if (value) { // if validation fails, value will be null
+      console.log(value); // value here is an instance of Person
+        }
+    }
+
+
  
     render () {
         let alt = (this.state.route === 'Login') ? 'SignUp' : 'Login';
         return (
             <ScrollView style={{padding: 20, backgroundColor:'#1d4a5f'}}>
                 <Text style={styles.login}>{this.state.route}</Text>
-                <TextInput style={styles.input}
-                    placeholder='Username'
-                    autoCapitalize='none'
-                    autoCorrect={false} 
-                    autoFocus={true} 
-                    keyboardType='email-address'
-                    value={this.state.username} 
-                    onChangeText={(text) => this.setState({ username: text })} />
-                <TextInput style={styles.input}
-                    placeholder='Password'
-                    autoCapitalize='none'
-                    autoCorrect={false} 
-                    secureTextEntry={true} 
-                    value={this.state.password} 
-                    onChangeText={(text) => this.setState({ password: text })} />
+                        <Form
+                          ref="form"
+                          type={Person}
+                          options={options}
+                        />
                 <View style={{margin: 7}}/>
                 <TouchableOpacity>
                     <Text style={styles.button} onPress={(e) => this.userLogin(e)} title={this.state.route}>Login</Text>
@@ -89,18 +101,18 @@ const styles = StyleSheet.create({
   login: {
     marginTop:90,
     marginBottom:30,
-    fontSize: 40,
+    // fontSize: 40,
     textAlign:'center',
     color:'white'
 },
   text:{
-    fontSize:10,
+    // fontSize:10,
     marginTop:40,
     color: 'white'
 
 },
   input:{
-    fontSize:25,
+    // fontSize:25,
     marginBottom:30,
     borderWidth:2,
     borderColor: 'transparent',
@@ -111,7 +123,7 @@ const styles = StyleSheet.create({
     color:'white'
   },
   button:{
-    fontSize:25,
+    // fontSize:25,
     backgroundColor:'#50dcc1',
     height:40,
     textAlign:'center',
