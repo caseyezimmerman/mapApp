@@ -22,6 +22,10 @@ const instructions = Platform.select({
 });
 
 export default class App extends Component{
+  constructor(){
+    super();
+    this.makeMaps = this.makeMaps.bind(this);
+  }
   makeMaps(){
     console.log('make the maps')
   }
@@ -31,10 +35,10 @@ export default class App extends Component{
       <View style ={styles.container}>
         <Text style={styles.text}>SMART RUNNING APP</Text>
         <Button
-          onPress={makeMaps}
-          title="Learn More"
-          color="#841584"
-          accessibilityLabel="Learn more about this purple button"
+          onPress={this.makeMaps}
+          title="Login"
+          color="#009688"
+          accessibilityLabel="login"
         />
       </View>
     );
