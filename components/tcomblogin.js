@@ -26,6 +26,7 @@ stylesheet.textbox.normal.fontSize = 20
 stylesheet.textboxView.normal.marginBottom = 30
 stylesheet.textboxView.error.marginBottom = 30
 stylesheet.textbox.normal.color = 'white'
+stylesheet.textbox.normal.placeholderTextColor
 
 
 var Form = t.form.Form 
@@ -50,15 +51,23 @@ class Login extends Component {
             username: '',
             password: ''
         };
+        this.onPress = this.onPress.bind(this)
     }
 
     userLogin (e) {
         this.props.onLogin(this.state.username, this.state.password);
         e.preventDefault();
-        var name = this.state.username
-        var password = this.state.password
+        // var name = this.state.username
+        // var password = this.state.password
+        // console.log(name)
+        // console.log(password)
+        console.log('jasdlsyairhalkdsaual')
+        var name = (this.refs.form.getComponent('name').props.value) 
+        var email = (this.refs.form.getComponent('email').props.value)
+        var password = (this.refs.form.getComponent('password').props.value)  
         console.log(name)
-        console.log(password)
+        console.log(email)
+        console.log(password)    
        
     }
  
@@ -68,12 +77,14 @@ class Login extends Component {
         e.preventDefault();
     }
 
-    onPress () {
+    onPress (e) {
+    e.preventDefault()
+    console.log('%%%%%%%%%%%%%%%%%%%%%%%%%')
     // call getValue() to get the values of the form
-    var value = this.refs.form.getValue();
-    if (value) { // if validation fails, value will be null
-      console.log(value); // value here is an instance of Person
-        }
+    // var value = this.refs.form.getValue();
+    // if (value) { // if validation fails, value will be null
+      // console.log(value); // value here is an instance of Person
+        // }
     }
 
 
@@ -83,7 +94,7 @@ class Login extends Component {
         return (
             <ScrollView style={{padding: 20, backgroundColor:'#1d4a5f'}}>
                 <Text style={styles.login}>{this.state.route}</Text>
-                        <Form style={styles.form}
+                        <Form style={styles.form} 
                           ref="form"
                           type={Person}
                           options={options}
