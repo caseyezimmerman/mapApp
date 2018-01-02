@@ -2,6 +2,22 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ScrollView, Text, TextInput, View, Button } from 'react-native';
 import { login } from '../actions/authAction';
+import t from 'tcomb-form-native';
+
+var Form = t.form.Form;
+console.log(t.form)
+
+// tcomb model
+var Person = t.struct({
+    name: t.String,
+    email: t.String,
+    rememberMe: t.Boolean
+});
+
+var options = {
+    auto: 'placeholders'
+}; // optional rendering options (see documentation)
+
  
 class Login extends Component {
     constructor (props) {
@@ -29,7 +45,12 @@ class Login extends Component {
         return (
             <ScrollView style={{padding: 20}}>
                 <Text style={{fontSize: 27}}>{this.state.route}</Text>
-                <TextInput 
+                <Form
+                    ref="form"
+                    type={Person}
+                    options={options}
+                />
+                {/*<TextInput 
                     placeholder='Username'
                     autoCapitalize='none'
                     autoCorrect={false} 
@@ -43,7 +64,7 @@ class Login extends Component {
                     autoCorrect={false} 
                     secureTextEntry={true} 
                     value={this.state.password} 
-                    onChangeText={(text) => this.setState({ password: text })} />
+                onChangeText={(text) => this.setState({ password: text })} />*/}
                 <View style={{margin: 7}}/>
                 <Button onPress={(e) => this.userLogin(e)} title={this.state.route}/>
                 <Text style={{fontSize: 16, color: 'blue'}} onPress={(e) => this.toggleRoute(e)}>{alt}</Text>
