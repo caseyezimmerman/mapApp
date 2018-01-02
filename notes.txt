@@ -1,0 +1,10 @@
+dec 22, what to do today.
+
+get javascript in our app, maybe.
+
+
+jan 2 2018
+
+make login, register, finished, profile, histroy running pages, make them templates.
+
+make it pretty.
