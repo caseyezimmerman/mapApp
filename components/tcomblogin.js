@@ -3,9 +3,36 @@ import { connect } from 'react-redux';
 import { ScrollView, Text, TextInput, View, Button, StyleSheet, TouchableOpacity, TouchableHighlight } from 'react-native';
 import { login } from '../actions/authAction';
 import t from 'tcomb-form-native'
+import _ from 'lodash'
+
+
+
+const stylesheet = _.cloneDeep(t.form.Form.stylesheet);
+
+stylesheet.textbox.normal.borderWidth = 0;
+stylesheet.textbox.error.borderWidth = 0;
+stylesheet.textbox.normal.marginBottom = 0;
+stylesheet.textbox.error.marginBottom = 0;
+
+stylesheet.textboxView.normal.borderWidth = 0;
+stylesheet.textboxView.error.borderWidth = 0;
+stylesheet.textboxView.normal.borderRadius = 0;
+stylesheet.textboxView.error.borderRadius = 0;
+stylesheet.textboxView.normal.borderBottomWidth = 1;
+stylesheet.textboxView.error.borderBottomWidth = 1;
+stylesheet.textbox.normal.marginBottom = 5;
+stylesheet.textbox.error.marginBottom = 5;
+stylesheet.textbox.normal.fontSize = 20
+stylesheet.textboxView.normal.marginBottom = 30
+stylesheet.textboxView.error.marginBottom = 30
+stylesheet.textbox.normal.color = 'white'
+
 
 var Form = t.form.Form 
-var options = {}; // optional rendering options (see documentation)
+var options = {
+    auto: 'placeholders',
+    stylesheet: stylesheet
+}; // optional rendering options (see documentation)
 
 var Person = t.struct({
   name: t.String,              // a required string
@@ -56,7 +83,7 @@ class Login extends Component {
         return (
             <ScrollView style={{padding: 20, backgroundColor:'#1d4a5f'}}>
                 <Text style={styles.login}>{this.state.route}</Text>
-                        <Form
+                        <Form style={styles.form}
                           ref="form"
                           type={Person}
                           options={options}
@@ -99,9 +126,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
 },
   login: {
-    marginTop:90,
+    marginTop:50,
     marginBottom:30,
-    // fontSize: 40,
+    fontSize: 40,
     textAlign:'center',
     color:'white'
 },
@@ -123,15 +150,19 @@ const styles = StyleSheet.create({
     color:'white'
   },
   button:{
-    // fontSize:25,
+    fontSize:25,
     backgroundColor:'#50dcc1',
-    height:40,
+    height:50,
     textAlign:'center',
     color:'white',
     fontWeight:'bold'
   },
   placeholder:{
     color:'white'
+  },
+  form:{
+    marginBottom:20,
+
   }
 
 });
