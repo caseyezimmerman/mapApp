@@ -48,6 +48,7 @@ export default class App extends Component{
           style={styles.stretch}
           source={require('./city4.png')}
         />
+
        {/*<Image 
           style={styles.stretch}
           source={require('./rebal2.png')}
@@ -96,6 +97,7 @@ const styles = StyleSheet.create({
     shadowColor: 'black',
     shadowOpacity: 1.0,
     borderRadius:5,
+
     
   },
   output: {
