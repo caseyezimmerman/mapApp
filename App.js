@@ -5,7 +5,7 @@ import Secured from './components/Secured';
 // import TcombLogin from './components/tcomblogin'
 import { TabNavigator } from 'react-navigation'
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import App2 from './components/App2'
+import  App2  from './components/App2'
 import { View, Text, TouchableHighlight } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import { Button } from 'react-native';
@@ -13,15 +13,20 @@ import { StyleSheet } from 'react-native'
 import PropTypes from 'prop-types';
 import SignUp from './components/tcomblogin'
 import AppRouter from './router'
+import MapMaker from './components/MapMaker'
 
 
 
 const HomeScreen = () => <SignUp />
 const MapScreen = () => <App2 />
+const MapScreenAgain = () => <MapMaker />
+
 
 const NavConfig = {
   Home: { screen: SignUp},
-  Map: {screen: App2}
+  Map: {screen: App2},
+  RunningMap: {screen: MapMaker}
+
 }
 
 const AppWithNavigation = TabNavigator(NavConfig)
