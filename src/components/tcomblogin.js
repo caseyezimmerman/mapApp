@@ -6,15 +6,12 @@ import t from 'tcomb-form-native'
 import _ from 'lodash'
 import { bindActionCreators } from 'redux'
 
-
-
 const stylesheet = _.cloneDeep(t.form.Form.stylesheet);
 
 stylesheet.textbox.normal.borderWidth = 0;
 stylesheet.textbox.error.borderWidth = 0;
 stylesheet.textbox.normal.marginBottom = 0;
 stylesheet.textbox.error.marginBottom = 0;
-
 stylesheet.textboxView.normal.borderWidth = 0;
 stylesheet.textboxView.error.borderWidth = 0;
 stylesheet.textboxView.normal.borderRadius = 0;
@@ -34,16 +31,15 @@ var Form = t.form.Form
 var options = {
     auto: 'placeholders',
     stylesheet: stylesheet
-}; // optional rendering options (see documentation)
+};
 
 var Person = t.struct({
-  name: t.String,              // a required string
-  email: t.String,  // an optional string
-  password: t.Number,               // a required number
-  rememberMe: t.Boolean        // a boolean
+  name: t.String, 
+  email: t.String,
+  password: t.Number,          
+  rememberMe: t.Boolean    
 });
 
- 
 class Login extends Component {
     constructor (props) {
         super(props);
@@ -57,21 +53,11 @@ class Login extends Component {
 
     userLogin (e) {
         e.preventDefault();
-        // var name = this.state.username
-        // var password = this.state.password
-        // console.log(name)
-        // console.log(password)
-        console.log('jasdlsyairhalkdsaual')
         var name = (this.refs.form.getComponent('name').props.value) 
         var email = (this.refs.form.getComponent('email').props.value)
         var password = (this.refs.form.getComponent('password').props.value)  
-        console.log(name)
-        console.log(email)
-        console.log(password) 
-        this.props.onLogin(name,email,password);   
-       
+        this.props.onLogin(name,email,password);    
     }
- 
     toggleRoute (e) {
         let alt = (this.state.route === 'Login') ? 'SignUp' : 'Login';
         this.setState({ route: alt });
@@ -80,16 +66,8 @@ class Login extends Component {
 
     onPress (e) {
     e.preventDefault()
-    console.log('%%%%%%%%%%%%%%%%%%%%%%%%%')
-    // call getValue() to get the values of the form
-    // var value = this.refs.form.getValue();
-    // if (value) { // if validation fails, value will be null
-      // console.log(value); // value here is an instance of Person
-        // }
     }
 
-
- 
     render () {
         let alt = (this.state.route === 'Login') ? 'SignUp' : 'Login';
         return (
@@ -109,8 +87,7 @@ class Login extends Component {
         );
     }
 }
- 
- 
+
 const mapStateToProps = (state, ownProps) => {
     return {
         isLoggedIn: state.auth.isLoggedIn
@@ -123,15 +100,7 @@ function mapDispatchToProps(dispatch){
     },dispatch)
 }
  
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         onLogin: login
-//         // onSignUp: (username, password) => { dispatch(signup(username, password)); }
-//     },dispatch)
-// }
- 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
-
 
 const styles = StyleSheet.create({
   container: {
@@ -154,7 +123,6 @@ const styles = StyleSheet.create({
     // fontSize:10,
     marginTop:40,
     color: 'white'
-
 },
   input:{
     // fontSize:25,
@@ -180,7 +148,5 @@ const styles = StyleSheet.create({
   },
   form:{
     marginBottom:20,
-
   }
-
 });

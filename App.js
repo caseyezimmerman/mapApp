@@ -1,23 +1,22 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import Login from './components/Login';
-import Secured from './components/Secured';
-import TcombLogin from './components/tcomblogin'
- 
-class App extends Component {
+import React from 'react';
+import { AppRegistry } from 'react-native';
+import { Provider, connect } from 'react-redux';
+import { createStore } from 'redux';
+
+import AppReducer from './src/reducers';
+import AppWithNavigationState from './src/navigators/AppNavigator';
+
+class myMapApp extends React.Component {
+    store = createStore(AppReducer);
     render() {
-        if (this.props.isLoggedIn) {
-            return <Secured />;
-        } else {
-            return <TcombLogin />;
-        }
+        return (
+            <Provider store={this.store}>
+                <AppWithNavigationState />
+            </Provider>
+        );
     }
 }
- 
-const mapStateToProps = (state, ownProps) => {
-    return {
-        isLoggedIn: state.auth.isLoggedIn
-    };
-}
- 
-export default connect(mapStateToProps)(App);
+
+AppRegistry.registerComponent('myMapApp', () => myMapApp);
+
+export default MapApp;

@@ -1,25 +1,24 @@
-import { AppRegistry } from 'react-native';
-import App from './App';
 import React, { Component } from 'react'
-import { Provider } from 'react-redux';
-// import store from './redux';
+import { AppRegistry } from 'react-native';
+import { Provider, connect } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux'
-import rootReducer from './reducers';
-
 import reduxPromise from 'redux-promise'
 
-// let store = createStore(rootReducer);
-const store = applyMiddleware(reduxPromise)(createStore)(rootReducer)
+import AppReducer from './src/reducers';
+import AppWithNavigationState from './src/navigators/AppNavigator';
+
+const store = applyMiddleware(reduxPromise)(createStore)(AppReducer)
 
 export default class myMapApp extends Component {
   render() {
     return (
       <Provider store={store}>
-        <App />
+        <AppWithNavigationState />
       </Provider>
     );
   }
 }
+
 AppRegistry.registerComponent('myMapApp', () => myMapApp);
 
 
