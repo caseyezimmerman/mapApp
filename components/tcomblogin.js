@@ -1,11 +1,31 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { ScrollView, Text, TextInput, View, Button, StyleSheet, TouchableOpacity, TouchableHighlight } from 'react-native';
-import login from '../actions/authAction';
+import { Keyboard, CardSection, ScrollView, Text, TextInput, View, Button, StyleSheet, TouchableOpacity, TouchableHighlight } from 'react-native';
+import signup from '../actions/authAction';
 import t from 'tcomb-form-native'
 import _ from 'lodash'
 import { bindActionCreators } from 'redux'
+import { TabNavigator } from 'react-navigation'
+import { Actions } from 'react-native-router-flux';
 
+
+
+
+// export default ({ navigation }) => (
+//   <View style={{ paddingVertical: 20 }}>
+//     <Card>
+//       { /* ... */}
+
+//       <Button
+//         buttonStyle={{ marginTop: 20 }}
+//         backgroundColor="transparent"
+//         textStyle={{ color: "#bcbec1" }}
+//         title="Sign In"
+//         onPress={() => navigation.navigate("SignIn")}
+//       />
+//     </Card>
+//   </View>
+// );
 
 
 const stylesheet = _.cloneDeep(t.form.Form.stylesheet);
@@ -44,18 +64,18 @@ var Person = t.struct({
 });
 
  
-class Login extends Component {
+class SignUp extends Component {
     constructor (props) {
         super(props);
         this.state = {
-            route: 'Login',
+            route: 'SignUp',
             username: '',
             password: ''
         };
         this.onPress = this.onPress.bind(this)
     }
 
-    userLogin (e) {
+    userSignUp (e) {
         e.preventDefault();
         // var name = this.state.username
         // var password = this.state.password
@@ -68,12 +88,12 @@ class Login extends Component {
         console.log(name)
         console.log(email)
         console.log(password) 
-        this.props.onLogin(name,email,password);   
+        this.props.onSignUp(name,email,password);   
        
     }
  
     toggleRoute (e) {
-        let alt = (this.state.route === 'Login') ? 'SignUp' : 'Login';
+        let alt = (this.state.route === 'SignUp') ? 'Login' : 'SignUp';
         this.setState({ route: alt });
         e.preventDefault();
     }
@@ -88,10 +108,16 @@ class Login extends Component {
         // }
     }
 
+    componentWillMount(newProps){
+        console.log(newProps)
+    }
+
+ 
+    
 
  
     render () {
-        let alt = (this.state.route === 'Login') ? 'SignUp' : 'Login';
+        let alt = (this.state.route === 'SignUp') ? 'Login' : 'SignUp';
         return (
             <ScrollView style={{padding: 20, backgroundColor:'#1d4a5f'}}>
                 <Text style={styles.login}>{this.state.route}</Text>
@@ -100,9 +126,9 @@ class Login extends Component {
                           type={Person}
                           options={options}
                         />
-                <View style={{margin: 7}}/>
+                <View style={{margin: 7}}/>                        
                 <TouchableOpacity>
-                    <Text style={styles.button} onPress={(e) => this.userLogin(e)} title={this.state.route}>Login</Text>
+                    <Text style={styles.button} onPress={(e) => this.userSignUp(e)} title={this.state.route}>Sign Up</Text>
                 </TouchableOpacity>
                 <Text style={styles.text} onPress={(e) => this.toggleRoute(e)}>{alt}</Text>
             </ScrollView>
@@ -119,7 +145,7 @@ const mapStateToProps = (state, ownProps) => {
 
 function mapDispatchToProps(dispatch){
     return bindActionCreators({
-        onLogin: login
+        onSignUp: signup
     },dispatch)
 }
  
@@ -130,7 +156,7 @@ function mapDispatchToProps(dispatch){
 //     },dispatch)
 // }
  
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
 
 
 const styles = StyleSheet.create({
@@ -184,3 +210,5 @@ const styles = StyleSheet.create({
   }
 
 });
+
+

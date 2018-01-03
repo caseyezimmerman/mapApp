@@ -5,8 +5,11 @@ import { Provider } from 'react-redux';
 // import store from './redux';
 import { createStore, applyMiddleware } from 'redux'
 import rootReducer from './reducers';
-
+import { StackNavigator } from 'react-navigation';
 import reduxPromise from 'redux-promise'
+import AppRouter from './router'
+
+
 
 // let store = createStore(rootReducer);
 const store = applyMiddleware(reduxPromise)(createStore)(rootReducer)
