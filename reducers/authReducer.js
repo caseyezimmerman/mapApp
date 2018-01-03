@@ -24,7 +24,7 @@
 // }
 
 function reducer (state=[], action){
-	if(action.type === 'LOGIN'){
+	if(action.type === 'SIGNUP'){
 		// im going to update
 		return action.payload.data
 	}else if (action.type === 'LOGOUT'){

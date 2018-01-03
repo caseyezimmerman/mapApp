@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-function signup(name,email,password){
+function signup(name,email,password,navigator){
 	var axiosPromise = axios({
 	method: 'POST',
 	url: 'http://localhost:3000/signup',
@@ -9,6 +9,12 @@ function signup(name,email,password){
 		email: email,
 		password: password
 		}
+	})
+	.then((data)=>{
+		console.log('hi')
+		console.log(data)
+		navigator.navigate('Map')
+		return data
 	})
     return {
         type: 'SIGNUP',

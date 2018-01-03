@@ -75,7 +75,7 @@ class SignUp extends Component {
         this.onPress = this.onPress.bind(this)
     }
 
-    userSignUp (e) {
+    userSignUp (e, navigator) {
         e.preventDefault();
         // var name = this.state.username
         // var password = this.state.password
@@ -88,7 +88,7 @@ class SignUp extends Component {
         console.log(name)
         console.log(email)
         console.log(password) 
-        this.props.onSignUp(name,email,password);   
+        this.props.onSignUp(name,email,password,navigator);   
        
     }
  
@@ -117,6 +117,7 @@ class SignUp extends Component {
 
  
     render () {
+        console.log(this.props)
         let alt = (this.state.route === 'SignUp') ? 'Login' : 'SignUp';
         return (
             <ScrollView style={{padding: 20, backgroundColor:'#1d4a5f'}}>
@@ -126,9 +127,13 @@ class SignUp extends Component {
                           type={Person}
                           options={options}
                         />
+                        <Button
+                          onPress={() => this.props.navigation.navigate('Map')}
+                          title="Map"
+                        />
                 <View style={{margin: 7}}/>                        
                 <TouchableOpacity>
-                    <Text style={styles.button} onPress={(e) => this.userSignUp(e)} title={this.state.route}>Sign Up</Text>
+                    <Text style={styles.button} onPress={(e) => this.userSignUp(e, this.props.navigation)} title={this.state.route}>Sign Up</Text>
                 </TouchableOpacity>
                 <Text style={styles.text} onPress={(e) => this.toggleRoute(e)}>{alt}</Text>
             </ScrollView>

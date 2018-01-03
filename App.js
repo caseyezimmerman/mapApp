@@ -20,14 +20,15 @@ const HomeScreen = () => <SignUp />
 const MapScreen = () => <App2 />
 
 const NavConfig = {
-  Home: { screen: HomeScreen},
-  Map: {screen: MapScreen}
+  Home: { screen: SignUp},
+  Map: {screen: App2}
 }
 
-const AppWithNavigation = TabNavigator(NavConfig)
+const AppWithNavigation = StackNavigator(NavConfig)
  
 class App extends Component {
     render() {
+      console.log(this.props)
        return(
         <View style={{ paddingTop: 40, flex: 1}}>
           <AppWithNavigation />
