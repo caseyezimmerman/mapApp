@@ -24,7 +24,7 @@ const NavConfig = {
   Map: {screen: App2}
 }
 
-const AppWithNavigation = StackNavigator(NavConfig)
+const AppWithNavigation = TabNavigator(NavConfig)
  
 class App extends Component {
     render() {
