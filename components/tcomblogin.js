@@ -83,6 +83,7 @@ class SignUp extends Component {
         // console.log(password)
         console.log('jasdlsyairhalkdsaual')
         var name = (this.refs.form.getComponent('name').props.value) 
+        console.log(typeof name)
         var email = (this.refs.form.getComponent('email').props.value)
         var password = (this.refs.form.getComponent('password').props.value)  
         console.log(name)

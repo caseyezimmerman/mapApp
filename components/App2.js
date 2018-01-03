@@ -59,10 +59,10 @@ class App extends Component{
 
   makeMap(e,navigator){
     e.preventDefault()
+    console.log(this.refs.form.getComponent('location'))
     console.log('$$$$$$$$$$$$$$$$$$$$')
-    console.log(this.refs.form.getComponent('location').props.value)
-    console.log(this.refs.form.getComponent('distance').props.value)
     location = (this.refs.form.getComponent('location').props.value)
+    console.log(typeof location)
     distance = (this.refs.form.getComponent('distance').props.value)
     this.props.mapAction(location,distance,navigator)
   }
