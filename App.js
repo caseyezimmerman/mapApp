@@ -4,116 +4,123 @@
  * @flow
  */
 
-import React, { Component } from 'react';
+import React from 'react';
 import {
+  Alert,
   Platform,
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  Image,
-  TouchableOpacity
+  StyleSheet
 } from 'react-native';
-import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import NavBar from './containers/NavBar';
+import MapView from 'react-native-maps'
 
+const LATITUDE_DELTA = 0.01;
+const LONGITUDE_DELTA = 0.01;
 
+const initialRegion = {
+  latitude: -37.78825,
+  longitude: -122.4324,
+  latitudeDelta: 0.0922,
+  longitudeDelta: 0.0421,
+}
 
-export default class App extends Component{
+class App extends React.Component {
+
+  map = null;
+
+  state = {
+    region: {
+      latitude: -37.78825,
+      longitude: -122.4324,
+      latitudeDelta: 0.0922,
+      longitudeDelta: 0.0421,
+    },
+    ready: true,
+    filteredMarkers: []
+  };
+
+  setRegion(region) {
+    if(this.state.ready) {
+      console.log(this.map)
+      setTimeout(() => this.map.mapview.animateToRegion(region), 10);
+    }
+    this.setState({ region });
+  }
+
+  componentDidMount() {
+    console.log('Component did mount');
+    this.getCurrentPosition();
+  }
+
+  getCurrentPosition() {
+    try {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const region = {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+            latitudeDelta: LATITUDE_DELTA,
+            longitudeDelta: LONGITUDE_DELTA,
+          };
+          this.setRegion(region);
+        },
+        (error) => {
+          //TODO: better design
+          switch (error.code) {
+            case 1:
+              if (Platform.OS === "ios") {
+                Alert.alert("", "Para ubicar tu locación habilita permiso para la aplicación en Ajustes - Privacidad - Localización");
+              } else {
+                Alert.alert("", "Para ubicar tu locación habilita permiso para la aplicación en Ajustes - Apps - ExampleApp - Localización");
+              }
+              break;
+            default:
+              Alert.alert("", "Error al detectar tu locación");
+          }
+        }
+      );
+    } catch(e) {
+      alert(e.message || "");
+    }
+  };
+
+  onMapReady = (e) => {
+    if(this.state.ready) {
+      this.setState({ready: true});
+    }
+  };
+
+  onRegionChange = (region) => {
+    console.log('onRegionChange', region);
+  };
+
+  onRegionChangeComplete = (region) => {
+    console.log('onRegionChangeComplete', region);
+  };
+
   render() {
-    const { region } = this.props;
-    return (
-      <View style ={styles.container}>
-        <NavBar />
-        <Text style={styles.text}>STUPID RUNNING APP</Text>
-        {/*<MapView
-          provider={PROVIDER_GOOGLE}
-          style={styles.map}
-          region={{
-            latitude: 37.78825,
-            longitude: -122.4324,
-            latitudeDelta: 0.015,
-            longitudeDelta: 0.0121,
-          }}
-        ></MapView>*/}
-        <Text style={styles.output}>Location:</Text>
-        <TextInput style={styles.input}/>
-        <Text style={styles.output}>Distance:</Text>
-        <TextInput style={styles.input}/>
-        <TouchableOpacity>
-          <Text style={styles.button}>Run</Text>
-        </TouchableOpacity>
-        <Image 
-          style={styles.stretch}
-          source={require('./city4.png')}
-        />
 
-       {/*<Image 
-          style={styles.stretch}
-          source={require('./rebal2.png')}
-        />
-        <Text style={styles.output}>Login</Text>
-        <TextInput style={styles.input}/>
-        <TextInput style={styles.input}/>*/}
-      </View>
+    const { region } = this.state;
+    const { children, renderMarker, markers } = this.props;
+
+    return (
+      <MapView
+        showsUserLocation
+        ref={ map => { this.map = map }}
+        data={markers}
+        initialRegion={initialRegion}
+        renderMarker={renderMarker}
+        onMapReady={this.onMapReady}
+        showsMyLocationButton={false}
+        onRegionChange={this.onRegionChange}
+        onRegionChangeComplete={this.onRegionChangeComplete}
+        style={StyleSheet.absoluteFill}
+        textStyle={{ color: '#bc8b00' }}
+        containerStyle={{backgroundColor: 'white', borderColor: '#BC8B00'}}>
+
+        
+
+      </MapView>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  stretch: {
-    width: '100%',
-  },
-  container: {
-    // ...StyleSheet.absoluteFillObject,
-    // height: 400,
-    // width: 400,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    backgroundColor: '#35586c',
-    height: '100%',
-},
-  map: {
-    // ...StyleSheet.absoluteFillObject,
-    height:'60%',
-    width: '90%',
-    marginBottom:20
-},
-  text:{
-    fontSize:40,
-    marginBottom:10,
-    textAlign: 'center',
-  },
-  input:{
-    backgroundColor: 'white',
-    borderColor:'black',
-    borderWidth:1,
-    height:45,
-    width:300,
-    // marginLeft:50,
-    marginBottom:10,
-    shadowOffset: {width: 0.5, height: 0.5, },
-    shadowColor: 'black',
-    shadowOpacity: 1.0,
-    borderRadius:5,
-
-    
-  },
-  output: {
-    fontSize: 30,
-  },
-  button:{
-    backgroundColor:'teal',
-    color:'white',
-    height:35,
-    lineHeight:30,
-    marginTop: 15,
-    textAlign:'center',
-    width:55,
-    // marginLeft:65,
-    fontSize:17,
-    borderRadius:10
-  }
-
-});
+export default App;
