@@ -9,6 +9,8 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux'
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
+import WaypointsAction from '../actions/WaypointsActions'
+import { bindActionCreators } from 'redux'
 
 class MapMaker extends Component{
     constructor() {
@@ -31,7 +33,8 @@ class MapMaker extends Component{
       //   );
       // }
 
-    getWaypoints(){
+      getWaypoints(userLat, userLng){
+        console.log("waypoints")
         var latArray = []
         var lngArray = []
         var markerArray = []
@@ -43,34 +46,35 @@ class MapMaker extends Component{
         var range = 0.11
         var lat = userLat
         var lng = userLng
+        console.log(lat)
+        console.log(lng)
 
         for(let i=0; i <= numOfPoints; i++){
-        x2 = Math.cos(angle) * range;
-        y2 = Math.sin(angle) * range;
+        x2 = 0.0001
+        y2 = 0.0001
         newLat = lat+x2;
         newLng = lng+y2;
         // console.log(typeof newLat);
         // console.log(newLng)
 
-        lat_lng = new google.maps.LatLng(newLat,newLng);
-        var marker = new google.maps.Marker({
-          position: lat_lng,
-          map: map,
-          // visibile: false
+        // lat_lng = new google.maps.LatLng(newLat,newLng);
+        // var marker = new google.maps.Marker({
+        //   position: lat_lng,
+        //   map: map,
+        //   // visibile: false
           
-        });
-        
-        latArray.push(lat_lng.lat()); ////push lats of points we just looped through and placed on map
-        lngArray.push(lat_lng.lng());
-        markerArray.push(marker);
-        angle += degreesPerPoint;
-
-
+        // });
+        console.log(newLat)
+        console.log(newLng)
+        return [newLat, newLng]
+        // latArray.push(lat_lng.lat()); ////push lats of points we just looped through and placed on map
+        // lngArray.push(lat_lng.lng());
+        // markerArray.push(marker);
+        // angle += degreesPerPoint;
       }
     }
 
     render() {
-    getWaypoints()
     const { region } = this.props;
     console.log(this.props)
     if(this.props.theMap.userLatLng === undefined){
@@ -78,6 +82,10 @@ class MapMaker extends Component{
     }else{
       var userLat = this.props.theMap.userLatLng.lat
       var userLng = this.props.theMap.userLatLng.lng
+      var coorArray = this.getWaypoints(userLat, userLng)
+      console.log(coorArray)
+      var newLat = coorArray[0]
+      var newLng = coorArray[1]
     }
     console.log(this.props.theMap.userLatLng.lat)
     // var userLat = this.props.theMap.userLatLng.lat
@@ -103,9 +111,15 @@ class MapMaker extends Component{
             coordinate={{latitude: userLat,
             longitude: userLng}}
             title={"title"}
-            description={"description"}
+            description={"description"},
+            coordinate={{latitude: newLat,
+            longitude: newLng}}
+            title={"title"}
+            description={"description"},
          />
-        </MapView>
+         </MapView>
+
+
       </View>
       );
     }
@@ -117,8 +131,14 @@ const mapStateToProps = (state, ownProps) => {
     };
 }
 
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({
+    getWaypoints: WaypointsAction
+  },dispatch)
+}
 
-export default connect(mapStateToProps)(MapMaker)
+
+export default connect(mapStateToProps,mapDispatchToProps)(MapMaker)
 
 const styles = StyleSheet.create({
   container: {
