@@ -12,18 +12,28 @@ import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 class MapMaker extends Component{
     constructor(props) {
       super(props);
-        this.state = {
-        coordinate: new MapView.AnimatedRegion({
-          latitude: 37.78825,
-          longitude: -122.4324,
-        }),
-      };
     }
+
+// The geolocation api exists on the global navigator object in React Native,
+// NOT TO BE CONFUSED WITH REACT NAVIGATION
+      // componentDidMount() {
+      //   navigator.geolocation.getCurrentPosition(
+      //     (position) => {
+      //       this.setState({
+      //         latitude: position.coords.latitude,
+      //         longitude: position.coords.longitude,
+      //         error: null,
+      //       });
+      //     },
+      //     (error) => this.setState({ error: error.message }),
+      //     { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
+      //   );
+      // }
 
     render() {
     const { region } = this.props;
     console.log(this.props)
-    return (
+      return (
       <View style ={styles.container}>
         <Text style={styles.text}></Text>
         <MapView
@@ -44,8 +54,8 @@ class MapMaker extends Component{
          />
         </MapView>
       </View>
-    );
-  }
+      );
+    }
 }
 export default MapMaker
 
@@ -74,3 +84,7 @@ const styles = StyleSheet.create({
   }
 
 });
+
+
+
+

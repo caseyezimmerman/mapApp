@@ -22,7 +22,9 @@ import _ from 'lodash'
 import { bindActionCreators } from 'redux'
 import MapAction from '../actions/MapAction'
 import { connect } from 'react-redux'
+import Geocoder from 'react-native-geocoding';
 
+Geocoder.setApiKey('AIzaSyCOaoP7KuO0wOQ9fiejMot0D57UsaIQqCI')
 
 
 const instructions = Platform.select({
@@ -46,6 +48,10 @@ var Person = t.struct({
 });
 
 
+
+
+
+
 class App extends Component{
   constructor(props) {
     super(props);
@@ -65,7 +71,20 @@ class App extends Component{
     distance = (this.refs.form.getComponent('distance').props.value)
     console.log(typeof currentLocation)
     this.props.mapAction(currentLocation,distance,navigator)
+
+      Geocoder.getFromLocation("Atlanta").then(
+      json => {
+        var location = json.results[0].geometry.location;
+        console.log(location.lat + ", " + location.lng);
+      },
+      error => {
+        alert(error);
+      }
+    );
+
   }
+
+
 
   render() {
     const { region } = this.props;
