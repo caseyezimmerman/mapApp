@@ -41,7 +41,7 @@ var options = {
 }; // optional rendering options (see documentation)
 
 var Person = t.struct({
-  location: t.String,              // a required string
+  currentLocation: t.String,              // a required string
   distance: t.Number,  // an optional string
 });
 
@@ -59,12 +59,12 @@ class App extends Component{
 
   makeMap(e,navigator){
     e.preventDefault()
-    console.log(this.refs.form.getComponent('location'))
+    console.log(this.refs.form.getComponent('currentLocation'))
     console.log('$$$$$$$$$$$$$$$$$$$$')
-    location = (this.refs.form.getComponent('location').props.value)
-    console.log(typeof location)
+    currentLocation = (this.refs.form.getComponent('currentLocation').props.value)
     distance = (this.refs.form.getComponent('distance').props.value)
-    this.props.mapAction(location,distance,navigator)
+    console.log(typeof currentLocation)
+    this.props.mapAction(currentLocation,distance,navigator)
   }
 
   render() {

@@ -1,11 +1,11 @@
 import axios from 'axios'
 
-function MapAction(location,distance,navigator){
+function MapAction(currentLocation,distance,navigator){
 	var axiosPromise = axios({
 	method: 'POST',
 	url: 'http://localhost:3000/map',
 	data: {
-		location: location,
+		currentLocation: currentLocation,
 		distance: distance
 		}
 	})
