@@ -34,6 +34,19 @@ class MapMaker extends Component{
     render() {
     const { region } = this.props;
     console.log(this.props)
+    if(this.props.theMap.userLatLng === undefined){
+      this.props.theMap.userLatLng = {}
+    }else{
+      var userLat = this.props.theMap.userLatLng.lat
+      var userLng = this.props.theMap.userLatLng.lng
+    }
+    console.log(this.props.theMap.userLatLng.lat)
+    // var userLat = this.props.theMap.userLatLng.lat
+    // console.log(userLat)
+    // var lat = this.props.theMap.userLatLng.lat
+    // var lng = this.props.theMap.userLatLng.lat
+    // console.log(lat)
+    // console.log(lng)
       return (
       <View style ={styles.container}>
         <Text style={styles.text}></Text>
@@ -41,15 +54,15 @@ class MapMaker extends Component{
           provider={PROVIDER_GOOGLE}
           style={styles.map}
           region={{
-            latitude: 37.78825,
-            longitude: -122.4324,
+            latitude: userLat,
+            longitude: userLng,
             latitudeDelta: 0.015,
             longitudeDelta: 0.0121,
           }}
         >
         <MapView.Marker
-            coordinate={{latitude: 37.78825,
-            longitude: -122.4324}}
+            coordinate={{latitude: userLat,
+            longitude: userLng}}
             title={"title"}
             description={"description"}
          />
@@ -64,9 +77,9 @@ const mapStateToProps = (state, ownProps) => {
         theMap: state.map
     };
 }
-// console.log(theMap)
 
-export default MapMaker
+
+export default connect(mapStateToProps)(MapMaker)
 
 const styles = StyleSheet.create({
   container: {
