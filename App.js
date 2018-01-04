@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Login from './components/Login';
-import Secured from './components/Secured';
+import Login from './src/components/Login';
+import Secured from './src/components/Secured';
 // import TcombLogin from './components/tcomblogin'
 import { TabNavigator } from 'react-navigation'
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import  App2  from './components/App2'
+import  App2  from './src/components/App2'
 import { View, Text, TouchableHighlight } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import { Button } from 'react-native';
 import { StyleSheet } from 'react-native'
 import PropTypes from 'prop-types';
-import SignUp from './components/tcomblogin'
+import SignUp from './src/components/tcomblogin'
 import AppRouter from './router'
-import MapMaker from './components/MapMaker'
+import MapMaker from './src/components/MapMaker'
 
 
 

@@ -19,6 +19,7 @@ target 'myMapApp' do
   react_native_path = "../node_modules/react-native"
   pod "yoga", :path => "#{react_native_path}/ReactCommon/yoga"
   pod "React", :path => react_native_path
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
                 
   pod 'GoogleMaps'
                 

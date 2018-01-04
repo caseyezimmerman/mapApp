@@ -64,7 +64,7 @@ const mapStateToProps = (state, ownProps) => {
         theMap: state.map
     };
 }
-console.log(theMap)
+// console.log(theMap)
 
 export default MapMaker
 
