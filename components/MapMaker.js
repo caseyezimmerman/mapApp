@@ -7,11 +7,12 @@ import {
   Button,
   TouchableOpacity
 } from 'react-native';
+import { connect } from 'react-redux'
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 
 class MapMaker extends Component{
-    constructor(props) {
-      super(props);
+    constructor() {
+      super();
     }
 
 // The geolocation api exists on the global navigator object in React Native,
@@ -57,6 +58,14 @@ class MapMaker extends Component{
       );
     }
 }
+
+const mapStateToProps = (state, ownProps) => {
+    return {
+        theMap: state.map
+    };
+}
+console.log(theMap)
+
 export default MapMaker
 
 const styles = StyleSheet.create({

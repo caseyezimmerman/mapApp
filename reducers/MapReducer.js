@@ -1,7 +1,12 @@
 function MapReducer (state=[], action){
 	if(action.type === 'MAPMAKER'){
 		// im going to update
-		return action.payload.data
+		console.log(action.payload)
+		var mapStuff = {
+			userInput: action.payload[0].data,
+			userLatLng: action.payload[1]
+		}
+		return mapStuff
 	}else if (action.type === 'LOGOUT'){
 		return []
 	}else{

@@ -22,9 +22,7 @@ import _ from 'lodash'
 import { bindActionCreators } from 'redux'
 import MapAction from '../actions/MapAction'
 import { connect } from 'react-redux'
-import Geocoder from 'react-native-geocoding';
 
-Geocoder.setApiKey('AIzaSyCOaoP7KuO0wOQ9fiejMot0D57UsaIQqCI')
 
 
 const instructions = Platform.select({
@@ -59,7 +57,7 @@ class App extends Component{
       coordinate: new MapView.AnimatedRegion({
         latitude: 37.78825,
         longitude: -122.4324,
-      }),
+      })
     };
   }
 
@@ -72,15 +70,7 @@ class App extends Component{
     console.log(typeof currentLocation)
     this.props.mapAction(currentLocation,distance,navigator)
 
-      Geocoder.getFromLocation("Atlanta").then(
-      json => {
-        var location = json.results[0].geometry.location;
-        console.log(location.lat + ", " + location.lng);
-      },
-      error => {
-        alert(error);
-      }
-    );
+
 
   }
 
