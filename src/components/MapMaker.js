@@ -11,9 +11,7 @@ import { connect } from 'react-redux'
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import WaypointsAction from '../actions/WaypointsActions'
 import { bindActionCreators } from 'redux'
-import MapViewDirections from 'react-native-maps-directions';
-
-
+// import MapViewDirections from 'react-native-maps-directions';
 
 class MapMaker extends Component{
     constructor() {
@@ -124,56 +122,7 @@ class MapMaker extends Component{
     const GOOGLE_MAPS_APIKEY = 'AIzaSyCOaoP7KuO0wOQ9fiejMot0D57UsaIQqCI';
       return (
       <View style ={styles.container}>
-        <Text style={styles.text}></Text>
-        <MapView
-          provider={PROVIDER_GOOGLE}
-          style={styles.map}
-          region={{
-            latitude: userLat,
-            longitude: userLng,
-            latitudeDelta: 0.015,
-            longitudeDelta: 0.0121,
-          }}
-        >
-        <MapView.Marker
-            coordinate={{
-              latitude: userLat,
-              longitude: userLng
-            }}
-            title={"title"}
-            description={"description"}
-
-         />
-          <MapView.Marker
-            coordinate={{
-              latitude: newLat,
-              longitude: newLng
-            }}
-            title={"title"}
-            description={"description"}
-
-         />
-        <MapView.Marker
-            coordinate={{
-              latitude: newlat1,
-              longitude: newlng1
-            }}
-            title={"title"}
-            description={"description"}
-
-         />
-           <MapViewDirections
-              origin={origin}
-              destination={destination}
-              waypoints={waypoints}
-              mode='WALKING'
-              apikey={GOOGLE_MAPS_APIKEY}
-              strokeWidth={3}
-              strokeColor="blue"
-            />
-         </MapView>
-
-
+        <Text>We Tried</Text>
       </View>
       );
     }

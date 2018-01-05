@@ -21,14 +21,13 @@ class Secured extends Component {
         );
     }
 }
- 
- 
+
 const mapStateToProps = (state, ownProps) => {
     return {
         username: state.auth.username
     };
 }
- 
+
 const mapDispatchToProps = (dispatch) => {
     return {
         onLogout: () => { dispatch(logout()); }

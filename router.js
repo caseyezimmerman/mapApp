@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import App2 from './src/components/App2'
+// import App2 from './src/components/App2'
 
 
 class AppRouter extends Component {

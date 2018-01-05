@@ -8,26 +8,6 @@ import { bindActionCreators } from 'redux'
 import { TabNavigator } from 'react-navigation'
 import { Actions } from 'react-native-router-flux';
 
-
-
-
-// export default ({ navigation }) => (
-//   <View style={{ paddingVertical: 20 }}>
-//     <Card>
-//       { /* ... */}
-
-//       <Button
-//         buttonStyle={{ marginTop: 20 }}
-//         backgroundColor="transparent"
-//         textStyle={{ color: "#bcbec1" }}
-//         title="Sign In"
-//         onPress={() => navigation.navigate("SignIn")}
-//       />
-//     </Card>
-//   </View>
-// );
-
-
 const stylesheet = _.cloneDeep(t.form.Form.stylesheet);
 
 stylesheet.textbox.normal.borderWidth = 0;
@@ -54,16 +34,15 @@ var Form = t.form.Form
 var options = {
     auto: 'placeholders',
     stylesheet: stylesheet
-}; // optional rendering options (see documentation)
+};
 
 var Person = t.struct({
-  name: t.String,              // a required string
-  email: t.String,  // an optional string
-  password: t.Number,               // a required number
-  rememberMe: t.Boolean        // a boolean
+  name: t.String,
+  email: t.String,
+  password: t.Number,
+  rememberMe: t.Boolean
 });
 
- 
 class SignUp extends Component {
     constructor (props) {
         super(props);
@@ -77,18 +56,9 @@ class SignUp extends Component {
 
     userSignUp (e, navigator) {
         e.preventDefault();
-        // var name = this.state.username
-        // var password = this.state.password
-        // console.log(name)
-        // console.log(password)
-        console.log('jasdlsyairhalkdsaual')
         var name = (this.refs.form.getComponent('name').props.value) 
-        console.log(typeof name)
         var email = (this.refs.form.getComponent('email').props.value)
         var password = (this.refs.form.getComponent('password').props.value)  
-        console.log(name)
-        console.log(email)
-        console.log(password) 
         this.props.onSignUp(name,email,password,navigator);   
        
     }
@@ -101,16 +71,10 @@ class SignUp extends Component {
 
     onPress (e) {
     e.preventDefault()
-    console.log('%%%%%%%%%%%%%%%%%%%%%%%%%')
-    // call getValue() to get the values of the form
-    // var value = this.refs.form.getValue();
-    // if (value) { // if validation fails, value will be null
-      // console.log(value); // value here is an instance of Person
-        // }
     }
 
     componentWillMount(newProps){
-        console.log(newProps)
+
     }
 
  
@@ -118,7 +82,6 @@ class SignUp extends Component {
 
  
     render () {
-        console.log(this.props)
         let alt = (this.state.route === 'SignUp') ? 'Login' : 'SignUp';
         return (
             <ScrollView style={{padding: 20, backgroundColor:'#1d4a5f'}}>
@@ -141,8 +104,7 @@ class SignUp extends Component {
         );
     }
 }
- 
- 
+
 const mapStateToProps = (state, ownProps) => {
     return {
         isLoggedIn: state.auth.isLoggedIn
@@ -155,21 +117,11 @@ function mapDispatchToProps(dispatch){
     },dispatch)
 }
  
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         onLogin: login
-//         // onSignUp: (username, password) => { dispatch(signup(username, password)); }
-//     },dispatch)
-// }
- 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
 
 
 const styles = StyleSheet.create({
   container: {
-    // ...StyleSheet.absoluteFillObject,
-    // height: 400,
-    // width: 400,
     flex: 0.9,
     flexDirection: 'column',
     justifyContent: 'space-between',
@@ -183,13 +135,10 @@ const styles = StyleSheet.create({
     color:'white'
 },
   text:{
-    // fontSize:10,
     marginTop:40,
     color: 'white'
-
 },
   input:{
-    // fontSize:25,
     marginBottom:30,
     borderWidth:2,
     borderColor: 'transparent',
@@ -212,9 +161,7 @@ const styles = StyleSheet.create({
   },
   form:{
     marginBottom:20,
-
   }
-
 });
 
 

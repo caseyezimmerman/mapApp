@@ -12,7 +12,7 @@ class Login extends Component {
             password: ''
         };
     }
- 
+
     userLogin (e) {
         e.preventDefault();
         var name = this.state.username
@@ -58,8 +58,7 @@ class Login extends Component {
         );
     }
 }
- 
- 
+
 const mapStateToProps = (state, ownProps) => {
     return {
         isLoggedIn: state.auth.isLoggedIn
@@ -72,15 +71,11 @@ const mapDispatchToProps = (dispatch) => {
         onSignUp: (username, password) => { dispatch(signup(username, password)); }
     }
 }
- 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
 
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
 
 const styles = StyleSheet.create({
   container: {
-    // ...StyleSheet.absoluteFillObject,
-    // height: 400,
-    // width: 400,
     flex: 0.9,
     flexDirection: 'column',
     justifyContent: 'space-between',
@@ -97,7 +92,6 @@ const styles = StyleSheet.create({
     fontSize:10,
     marginTop:40,
     color: 'white'
-
 },
   input:{
     fontSize:25,
@@ -121,5 +115,4 @@ const styles = StyleSheet.create({
   placeholder:{
     color:'white'
   }
-
 });
