@@ -11,6 +11,9 @@ import { connect } from 'react-redux'
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import WaypointsAction from '../actions/WaypointsActions'
 import { bindActionCreators } from 'redux'
+import MapViewDirections from 'react-native-maps-directions';
+
+
 
 class MapMaker extends Component{
     constructor() {
@@ -43,6 +46,8 @@ class MapMaker extends Component{
         var degreesPerPoint = -5 /numOfPoints;
         var x2;
         var y2;
+        var x
+        var y
         var range = 0.11
         var lat = userLat
         var lng = userLng
@@ -50,10 +55,14 @@ class MapMaker extends Component{
         console.log(lng)
 
         for(let i=0; i <= numOfPoints; i++){
-        x2 = 0.0001
-        y2 = 0.0001
+        x2 = 0.001
+        y2 = 0.001
         newLat = lat+x2;
         newLng = lng+y2;
+        x = 0.01
+        y = 0.01
+        newlat1 = lat+x
+        newlng1 = lng+y
         // console.log(typeof newLat);
         // console.log(newLng)
 
@@ -66,7 +75,7 @@ class MapMaker extends Component{
         // });
         console.log(newLat)
         console.log(newLng)
-        return [newLat, newLng]
+        return [newLat, newLng, newlat1, newlng1]
         // latArray.push(lat_lng.lat()); ////push lats of points we just looped through and placed on map
         // lngArray.push(lat_lng.lng());
         // markerArray.push(marker);
@@ -86,6 +95,8 @@ class MapMaker extends Component{
       console.log(coorArray)
       var newLat = coorArray[0]
       var newLng = coorArray[1]
+      var newlat1 = coorArray[2]
+      var newlng1 = coorArray[3]
     }
     console.log(this.props.theMap.userLatLng.lat)
     // var userLat = this.props.theMap.userLatLng.lat
@@ -94,6 +105,23 @@ class MapMaker extends Component{
     // var lng = this.props.theMap.userLatLng.lat
     // console.log(lat)
     // console.log(lng)
+    // const markers = [
+    // {
+    //   coordinates:{
+    //     latitude: userLat,
+    //     longitude: userLng
+    //   },
+    //   coordinates:{
+    //     latitude: newLat,
+    //     longitude: newLng
+    //   }
+
+    // }]
+    // console.log(markers.coordinates)
+    const origin = {latitude: userLat, longitude: userLng};
+    const destination = {latitude: newLat, longitude: newLng};
+    const waypoints = {latitude: newlat1, longitude: newlng1};
+    const GOOGLE_MAPS_APIKEY = 'AIzaSyCOaoP7KuO0wOQ9fiejMot0D57UsaIQqCI';
       return (
       <View style ={styles.container}>
         <Text style={styles.text}></Text>
@@ -108,15 +136,41 @@ class MapMaker extends Component{
           }}
         >
         <MapView.Marker
-            coordinate={{latitude: userLat,
-            longitude: userLng}}
+            coordinate={{
+              latitude: userLat,
+              longitude: userLng
+            }}
             title={"title"}
-            description={"description"},
-            coordinate={{latitude: newLat,
-            longitude: newLng}}
-            title={"title"}
-            description={"description"},
+            description={"description"}
+
          />
+          <MapView.Marker
+            coordinate={{
+              latitude: newLat,
+              longitude: newLng
+            }}
+            title={"title"}
+            description={"description"}
+
+         />
+        <MapView.Marker
+            coordinate={{
+              latitude: newlat1,
+              longitude: newlng1
+            }}
+            title={"title"}
+            description={"description"}
+
+         />
+           <MapViewDirections
+              origin={origin}
+              destination={destination}
+              waypoints={waypoints}
+              mode='WALKING'
+              apikey={GOOGLE_MAPS_APIKEY}
+              strokeWidth={3}
+              strokeColor="blue"
+            />
          </MapView>
 
 
@@ -167,5 +221,13 @@ const styles = StyleSheet.create({
 });
 
 
+        // <MapView.Marker
+        //     coordinate={{
+        //       latitude: newLat,
+        //       longitude: newLng 
+        //     }}
+        //     title={"title"}
+        //     description={"description"}
 
+        //  />
 
