@@ -22,5 +22,7 @@ target 'myMapApp' do
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
                 
   pod 'GoogleMaps'
-                
+  
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
 end

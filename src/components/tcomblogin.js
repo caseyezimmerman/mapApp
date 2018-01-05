@@ -9,12 +9,10 @@ import { TabNavigator } from 'react-navigation'
 import { Actions } from 'react-native-router-flux';
 
 const stylesheet = _.cloneDeep(t.form.Form.stylesheet);
-
 stylesheet.textbox.normal.borderWidth = 0;
 stylesheet.textbox.error.borderWidth = 0;
 stylesheet.textbox.normal.marginBottom = 0;
 stylesheet.textbox.error.marginBottom = 0;
-
 stylesheet.textboxView.normal.borderWidth = 0;
 stylesheet.textboxView.error.borderWidth = 0;
 stylesheet.textboxView.normal.borderRadius = 0;
@@ -29,11 +27,10 @@ stylesheet.textboxView.error.marginBottom = 30
 stylesheet.textbox.normal.color = 'white'
 stylesheet.textbox.normal.placeholderTextColor
 
-
 var Form = t.form.Form 
 var options = {
-    auto: 'placeholders',
-    stylesheet: stylesheet
+	auto: 'placeholders',
+	stylesheet: stylesheet
 };
 
 var Person = t.struct({
@@ -44,65 +41,56 @@ var Person = t.struct({
 });
 
 class SignUp extends Component {
-    constructor (props) {
-        super(props);
-        this.state = {
-            route: 'SignUp',
-            username: '',
-            password: ''
-        };
-        this.onPress = this.onPress.bind(this)
-    }
+	constructor (props) {
+			super(props);
+			this.state = {
+					route: 'SignUp',
+					username: '',
+					password: ''
+			};
+			this.onPress = this.onPress.bind(this)
+	}
+	userSignUp (e, navigator) {
+			e.preventDefault();
+			var name = (this.refs.form.getComponent('name').props.value) 
+			var email = (this.refs.form.getComponent('email').props.value)
+			var password = (this.refs.form.getComponent('password').props.value)  
+			this.props.onSignUp(name,email,password,navigator);   
+	}
+	toggleRoute (e) {
+			let alt = (this.state.route === 'SignUp') ? 'Login' : 'SignUp';
+			this.setState({ route: alt });
+			e.preventDefault();
+	}
+	onPress (e) {
+		e.preventDefault()
+	}
 
-    userSignUp (e, navigator) {
-        e.preventDefault();
-        var name = (this.refs.form.getComponent('name').props.value) 
-        var email = (this.refs.form.getComponent('email').props.value)
-        var password = (this.refs.form.getComponent('password').props.value)  
-        this.props.onSignUp(name,email,password,navigator);   
-       
-    }
+	componentWillMount(newProps){
+	}
  
-    toggleRoute (e) {
-        let alt = (this.state.route === 'SignUp') ? 'Login' : 'SignUp';
-        this.setState({ route: alt });
-        e.preventDefault();
-    }
-
-    onPress (e) {
-    e.preventDefault()
-    }
-
-    componentWillMount(newProps){
-
-    }
-
- 
-    
-
- 
-    render () {
-        let alt = (this.state.route === 'SignUp') ? 'Login' : 'SignUp';
-        return (
-            <ScrollView style={{padding: 20, backgroundColor:'#1d4a5f'}}>
-                <Text style={styles.login}>{this.state.route}</Text>
-                        <Form style={styles.form} 
-                          ref="form"
-                          type={Person}
-                          options={options}
-                        />
-                        <Button
-                          onPress={() => this.props.navigation.navigate('Map')}
-                          title="Map"
-                        />
-                <View style={{margin: 7}}/>                        
-                <TouchableOpacity>
-                    <Text style={styles.button} onPress={(e) => this.userSignUp(e, this.props.navigation)} title={this.state.route}>Sign Up</Text>
-                </TouchableOpacity>
-                <Text style={styles.text} onPress={(e) => this.toggleRoute(e)}>{alt}</Text>
-            </ScrollView>
-        );
-    }
+	render () {
+		let alt = (this.state.route === 'SignUp') ? 'Login' : 'SignUp';
+		return (
+			<ScrollView style={{padding: 20, backgroundColor:'#1d4a5f'}}>
+				<Text style={styles.login}>{this.state.route}</Text>
+					<Form style={styles.form} 
+						ref="form"
+						type={Person}
+						options={options}
+					/>
+					<Button
+						onPress={() => this.props.navigation.navigate('Map')}
+						title="Map"
+					/>
+				<View style={{margin: 7}}/>                        
+				<TouchableOpacity>
+					<Text style={styles.button} onPress={(e) => this.userSignUp(e, this.props.navigation)} title={this.state.route}>Sign Up</Text>
+				</TouchableOpacity>
+				<Text style={styles.text} onPress={(e) => this.toggleRoute(e)}>{alt}</Text>
+			</ScrollView>
+		);
+	}
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -118,7 +106,6 @@ function mapDispatchToProps(dispatch){
 }
  
 export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
-
 
 const styles = StyleSheet.create({
   container: {

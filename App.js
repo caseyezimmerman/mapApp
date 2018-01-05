@@ -18,22 +18,44 @@ const HomeScreen = () => <SignUp />
 const MapStartScreen = () => <MapStart />
 const MapMakerScreen = () => <MapMaker />
 
-const NavBar = {
-  Home: { screen: SignUp},
-  Map: { screen: MapStartScreen},
-  RunningMap: { screen: MapMakerScreen}
+// adjust this for navbar
+const NavBarConfig = {
+  Home: { 
+    screen: SignUp,
+    tabBarIcon: ({ focused }) => (
+      <Ionicons
+        name={focused ? 'ios-people' : 'ios-people-outline'}
+        size={26}
+        style={{ color: focused ? '#33A3F4' : '#949494' }}
+      />
+    ),
+  },
+  Map: { 
+    screen: MapStartScreen
+  },
+  RunningMap: { 
+    screen: MapMakerScreen
+  }
 }
 
-const AppWithNavigation = TabNavigator(NavBar)
+// adjust this for styles
+const styleNavConfig = {
+  animationEnabled: true,
+  tabBarOptions: {
+    activeTintColor: '#e91e63',
+  }
+}
+
+const AppWithNavigation = TabNavigator(NavBarConfig, styleNavConfig)
  
 class App extends Component {
-    render() {
-       return(
-        <View style={{ paddingTop: 40, flex: 1}}>
-          <AppWithNavigation />
-        </View>  
-      )
-    }
+  render() {
+      return(
+      <View style={{ paddingTop: 40, flex: 1}}>
+        <AppWithNavigation />
+      </View>  
+    )
+  }
 }
 
 const mapStateToProps = (state, ownProps) => {
