@@ -22,13 +22,16 @@ const MapMakerScreen = () => <MapMaker />
 const NavBarConfig = {
   Home: { 
     screen: SignUp,
-    tabBarIcon: ({ focused }) => (
-      <Ionicons
-        name={focused ? 'ios-people' : 'ios-people-outline'}
-        size={26}
-        style={{ color: focused ? '#33A3F4' : '#949494' }}
-      />
-    ),
+    navigationOptions:{
+      tabBarLabel: 'Home',
+      tabBarIcon: ({ focused }) => (
+        <Ionicons
+          name={focused ? 'ios-people' : 'ios-people-outline'}
+          size={26}
+          style={{ color: focused ? '#33A3F4' : '#949494' }}
+        />
+      ),
+    }
   },
   Map: { 
     screen: MapStartScreen
