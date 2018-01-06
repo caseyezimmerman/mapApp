@@ -48,6 +48,10 @@ class MapMaker extends Component{
         var y2;
         var x
         var y
+        var x3
+        var y3
+        var x4
+        var y4
         var range = 0.11
         var lat = userLat
         var lng = userLng
@@ -55,14 +59,24 @@ class MapMaker extends Component{
         console.log(lng)
 
         for(let i=0; i <= numOfPoints; i++){
-        x2 = 0.001
-        y2 = 0.001
+        //origin 2, first point
+        x2 = 0.004
+        y2 = -0.005
         newLat = lat+x2;
         newLng = lng+y2;
-        x = 0.01
-        y = 0.01
-        newlat1 = lat+x
-        newlng1 = lng+y
+        // x = 0.01
+        // y = 0.01
+        // newlat1 = lat+x
+        // newlng1 = lng+y
+        x3 = -0.0092
+        y3 = -0.0096
+        newlat2 = lat+x3
+        newlng2 = lng+y3
+        // origin3
+        x4 = 0.002
+        y4 = -0.0099
+        newlat3 = lat+x4
+        newlng3 = lng+y4
         // console.log(typeof newLat);
         // console.log(newLng)
 
@@ -75,7 +89,7 @@ class MapMaker extends Component{
         // });
         console.log(newLat)
         console.log(newLng)
-        return [newLat, newLng, newlat1, newlng1]
+        return [newLat, newLng,newlat2, newlng2, newlat3, newlng3]
         // latArray.push(lat_lng.lat()); ////push lats of points we just looped through and placed on map
         // lngArray.push(lat_lng.lng());
         // markerArray.push(marker);
@@ -97,6 +111,10 @@ class MapMaker extends Component{
       var newLng = coorArray[1]
       var newlat1 = coorArray[2]
       var newlng1 = coorArray[3]
+      var newlat2 = coorArray[4]
+      var newlng2 = coorArray[5]
+      var newlat3 = coorArray[6]
+      var newlng3 = coorArray[7]
     }
     console.log(this.props.theMap.userLatLng.lat)
     // var userLat = this.props.theMap.userLatLng.lat
@@ -120,7 +138,13 @@ class MapMaker extends Component{
     // console.log(markers.coordinates)
     const origin = {latitude: userLat, longitude: userLng};
     const destination = {latitude: newLat, longitude: newLng};
-    const waypoints = {latitude: newlat1, longitude: newlng1};
+    const origin2 = {latitude: newLat, longitude: newLng};
+    const destination2 = {latitude: newlat2, longitude: newlng2};
+    const origin3 = {latitude: newlat2, longitude: newlng2};
+    const destination3 = {latitude: newlat1, longitude: newlng1};
+    const origin4 = {latitude: newlat1, longitude: newlng1};
+    const destination4 = {latitude: userLat, longitude:userLng};
+    const waypoints = {latitude: newlat3, longitude: newlng3};
     const GOOGLE_MAPS_APIKEY = 'AIzaSyCOaoP7KuO0wOQ9fiejMot0D57UsaIQqCI';
       return (
       <View style ={styles.container}>
@@ -131,16 +155,18 @@ class MapMaker extends Component{
           region={{
             latitude: userLat,
             longitude: userLng,
-            latitudeDelta: 0.015,
-            longitudeDelta: 0.0121,
+            latitudeDelta: 0.025,
+            longitudeDelta: 0.0221,
           }}
+          showsUserLocation={true}
+          followUserLocation={true}
         >
         <MapView.Marker
             coordinate={{
               latitude: userLat,
               longitude: userLng
             }}
-            title={"title"}
+            title={"1"}
             description={"description"}
 
          />
@@ -149,7 +175,7 @@ class MapMaker extends Component{
               latitude: newLat,
               longitude: newLng
             }}
-            title={"title"}
+            title={"2"}
             description={"description"}
 
          />
@@ -158,7 +184,25 @@ class MapMaker extends Component{
               latitude: newlat1,
               longitude: newlng1
             }}
-            title={"title"}
+            title={"3"}
+            description={"description"}
+
+         />
+         <MapView.Marker
+            coordinate={{
+              latitude: newlat2,
+              longitude: newlng2
+            }}
+            title={"4"}
+            description={"description"}
+
+         />
+         <MapView.Marker
+            coordinate={{
+              latitude: newlat3,
+              longitude: newlng3
+            }}
+            title={"5"}
             description={"description"}
 
          />
@@ -170,6 +214,33 @@ class MapMaker extends Component{
               apikey={GOOGLE_MAPS_APIKEY}
               strokeWidth={3}
               strokeColor="blue"
+            />
+            <MapViewDirections
+              origin={origin2}
+              destination={destination2}
+              waypoints={waypoints}
+              mode='WALKING'
+              apikey={GOOGLE_MAPS_APIKEY}
+              strokeWidth={3}
+              strokeColor="red"
+            />
+            <MapViewDirections
+              origin={origin3}
+              destination={destination3}
+              waypoints={waypoints}
+              mode='WALKING'
+              apikey={GOOGLE_MAPS_APIKEY}
+              strokeWidth={3}
+              strokeColor="orange"
+            />
+            <MapViewDirections
+              origin={origin4}
+              destination={destination4}
+              waypoints={waypoints}
+              mode='WALKING'
+              apikey={GOOGLE_MAPS_APIKEY}
+              strokeWidth={3}
+              strokeColor="purple"
             />
          </MapView>
 
